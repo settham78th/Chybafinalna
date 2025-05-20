@@ -759,9 +759,100 @@ def get_structural_quality_control_prompt(seniority, industry):
 
 def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
     """
-    Create an optimized version of CV using advanced AI processing with focus on specific keywords
-    and suggest missing skills and qualifications
+    Create an optimized version of CV with advanced skills extraction and transferable competencies analysis,
+    even for candidates without direct experience.
     """
+    # Wykryj poziom stanowiska i branżę
+    try:
+        seniority = detect_seniority_level(cv_text, job_description)
+        industry = detect_industry(job_description)
+        job_type = detect_job_type(job_description)
+        specific_role = detect_specific_role(job_description)
+    except Exception as e:
+        logger.error(f"Error detecting context: {str(e)}")
+        seniority, industry, job_type, specific_role = "junior", "general", "office", "specjalista"
+
+    prompt = f"""
+    TASK: Przeprowadź głęboką analizę CV i stwórz zoptymalizowaną wersję, która podkreśli wszystkie potencjalnie wartościowe umiejętności i doświadczenia, nawet jeśli kandydat nie ma bezpośredniego doświadczenia na danym stanowisku.
+
+    KLUCZOWE OBSZARY ANALIZY:
+
+    1. UMIEJĘTNOŚCI TRANSFEROWALNE:
+       - Przeanalizuj każde doświadczenie pod kątem umiejętności, które można przenieść na nowe stanowisko
+       - Znajdź powiązania między obecnymi umiejętnościami a wymaganiami stanowiska
+       - Przekształć ogólne umiejętności w konkretne atuty dla nowej roli
+       
+    2. UKRYTE KOMPETENCJE:
+       - Zidentyfikuj umiejętności wynikające z hobby, wolontariatu, projektów osobistych
+       - Wydobądź kompetencje z pozornie niezwiązanych doświadczeń
+       - Znajdź nietypowe źródła wartościowych umiejętności
+
+    3. POTENCJAŁ ROZWOJOWY:
+       - Podkreśl szybkość uczenia się i adaptacji
+       - Zaznacz wszystkie kursy, szkolenia i certyfikaty
+       - Uwypuklij chęć rozwoju w nowym kierunku
+
+    4. OSIĄGNIĘCIA I SUKCESY:
+       - Przekształć każde osiągnięcie w kontekst nowego stanowiska
+       - Podkreśl uniwersalne sukcesy (np. praca zespołowa, efektywność)
+       - Kwantyfikuj osiągnięcia tam, gdzie to możliwe
+
+    WSKAZÓWKI SPECJALNE:
+
+    1. Dla kandydata bez doświadczenia w {specific_role}:
+       - Znajdź wszystkie sytuacje wymagające podobnych umiejętności
+       - Przekształć doświadczenia z innych obszarów na język nowej roli
+       - Podkreśl projekty osobiste lub akademickie związane ze stanowiskiem
+
+    2. Transformacja umiejętności:
+       - Komunikacja → Obsługa klienta / Prezentacje / Negocjacje
+       - Organizacja → Zarządzanie projektami / Koordynacja
+       - Analiza → Rozwiązywanie problemów / Optymalizacja procesów
+
+    3. Wydobycie wartości z każdego doświadczenia:
+       - Praca w restauracji → Obsługa klienta, praca pod presją czasu, zarządzanie priorytetami
+       - Sprzedaż detaliczna → Negocjacje, prezentacja produktu, realizacja celów
+       - Projekty studenckie → Zarządzanie projektami, praca zespołowa, dotrzymywanie terminów
+
+    STRUKTURA NOWEGO CV:
+
+    1. Silne podsumowanie zawodowe:
+       - Podkreśl główne atuty pasujące do stanowiska
+       - Zaznacz gotowość do szybkiego przyswajania wiedzy
+       - Pokaż entuzjazm i motywację do rozwoju w nowym kierunku
+
+    2. Kluczowe umiejętności:
+       - Podziel na sekcje odpowiadające wymaganiom stanowiska
+       - Dodaj poziom zaawansowania i kontekst zdobycia umiejętności
+       - Uwzględnij umiejętności miękkie istotne dla roli
+
+    3. Doświadczenie zawodowe:
+       - Przekształć każde doświadczenie pod kątem nowej roli
+       - Podkreśl osiągnięcia związane z wymaganymi kompetencjami
+       - Używaj języka branżowego dopasowanego do stanowiska
+
+    4. Projekty i inicjatywy:
+       - Dodaj sekcję pokazującą praktyczne zastosowanie umiejętności
+       - Uwzględnij projekty osobiste, wolontariat, działalność dodatkową
+       - Podkreśl rezultaty i zdobyte kompetencje
+
+    CV:
+    {cv_text}
+
+    OPIS STANOWISKA:
+    {job_description}
+
+    WAŻNE:
+    1. Zachowaj pełną prawdziwość informacji
+    2. Nie wymyślaj doświadczenia ani umiejętności
+    3. Skup się na transformacji i lepszym przedstawieniu istniejących kompetencji
+    4. Używaj języka zrozumiałego dla branży
+    5. Podkreśl potencjał i chęć rozwoju
+
+    Zwróć zoptymalizowane CV w formacie tekstowym, wykorzystując powyższe wytyczne do maksymalnego wydobycia wartości z istniejącego doświadczenia kandydata.
+    """
+
+    return send_api_request(prompt, max_tokens=3000)
     # Jeśli nie podano słów kluczowych, spróbuj je wygenerować
     if keywords_data is None:
         try:
