@@ -1247,9 +1247,21 @@ def generate_recruiter_feedback(cv_text, job_description=""):
     
     return send_api_request(prompt, max_tokens=2000)
 
-def generate_cover_letter(cv_text, job_description):
+def generate_cover_letter(cv_text, job_description, company_name="", company_culture=""):
     """
-    Generate a cover letter based on a CV and job description
+    Generate an advanced, personalized cover letter with company research and cultural fit
+    """
+    prompt = f"""
+    TASK: Stwórz spersonalizowany list motywacyjny uwzględniający:
+    
+    1. Specyfikę firmy i jej kulturę organizacyjną
+    2. Dopasowanie doświadczenia do wartości firmy
+    3. Elementy storytellingu pokazujące motywację
+    4. Konkretne przykłady osiągnięć powiązane ze stanowiskiem
+    5. Odniesienia do aktualnych projektów/wyzwań firmy
+    
+    Firma: {company_name}
+    Kultura organizacyjna: {company_culture}
     """
     prompt = f"""
     TASK: Create a personalized cover letter based on this CV and job description.
@@ -1483,9 +1495,24 @@ def summarize_job_description(job_text):
     
     return send_api_request(prompt, max_tokens=1500)
 
-def extract_keywords_from_job(job_description):
+def extract_keywords_from_job(job_description, include_trends=True, context_analysis=True):
     """
-    Extract key keywords from a job description for CV optimization
+    Enhanced keyword extraction with trend analysis and context understanding
+    """
+    prompt = f"""
+    TASK: Przeprowadź zaawansowaną analizę słów kluczowych z uwzględnieniem:
+    
+    1. Główne słowa kluczowe (jak obecnie)
+    2. Analiza kontekstowa użycia każdego słowa
+    3. Alternatywne sformułowania i synonimy
+    4. Trendy w użyciu słów kluczowych w branży
+    5. Poziom istotności w różnych kontekstach
+    6. Sugestie użycia w CV
+    7. Popularne kombinacje słów kluczowych
+    
+    Dodatkowe analizy:
+    - Trendy rynkowe: {include_trends}
+    - Analiza kontekstowa: {context_analysis}
     """
     prompt = f"""
     TASK: Przeanalizuj dokładnie ten opis stanowiska i wyodrębnij kluczowe słowa i umiejętności.
@@ -1633,9 +1660,24 @@ def generate_keywords_html(keywords_data):
     
     return html
 
-def analyze_market_trends(job_title, industry=""):
+def analyze_market_trends(job_title, industry="", cv_text=""):
     """
-    Analyze market trends and suggest popular skills/keywords for a specific job or industry
+    Analyze market trends, skills gap and provide detailed career development suggestions
+    """
+    prompt = f"""
+    TASK: Przeprowadź kompleksową analizę rynku i dopasowania CV do stanowiska {job_title} w branży {industry}.
+    
+    Przeanalizuj:
+    1. Aktualne wymagania rynkowe vs umiejętności kandydata
+    2. Luka kompetencyjna i plan rozwoju
+    3. Trendy technologiczne w branży na najbliższe 2 lata
+    4. Sugestie szkoleń i certyfikacji
+    5. Analiza konkurencyjności kandydata
+    6. Potencjalne ścieżki rozwoju kariery
+    7. Szacowane widełki płacowe dla różnych poziomów doświadczenia
+    
+    CV:
+    {cv_text}
     """
     prompt = f"""
     TASK: Przeprowadź analizę trendów rynkowych dla pozycji: {job_title} w branży: {industry if industry else "wszystkich branżach"}.
