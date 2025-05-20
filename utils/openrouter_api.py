@@ -889,30 +889,67 @@ def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
        - [Nazwa certyfikatu 1] (Rok uzyskania)
        - [Nazwa certyfikatu 2] (Rok uzyskania - ważny do [Rok])
     
-    ANALIZA BRAKUJĄCYCH ELEMENTÓW:
-    1. Przeanalizuj wymagania ze stanowiska i porównaj z obecnym CV
-    2. Zidentyfikuj brakujące umiejętności techniczne i miękkie
-    3. Zaproponuj dodatkowe kwalifikacje i certyfikaty
-    4. Sugeruj konkretne kursy i szkolenia do uzupełnienia
-    5. Wskaż obszary doświadczenia do rozwinięcia
+    5. STRUKTURA CAŁEGO CV - zapewnij ujednolicony format:
+       - Zastosuj spójny układ graficzny
+       - Używaj jednolitych nagłówków sekcji
+       - Zadbaj o czytelne odstępy między sekcjami
+       - Usuń błędy ortograficzne i interpunkcyjne
+       - Sprawdź poprawność językową
+       - Usuń całkowicie niepotrzebne informacje
     
-    Format dla sugestii:
-    [SUGESTIE ROZWOJU]
+    6. ANALIZA BRAKUJĄCYCH ELEMENTÓW:
+       1. Przeanalizuj wymagania ze stanowiska i porównaj z obecnym CV
+       2. Zidentyfikuj brakujące umiejętności techniczne i miękkie
+       3. Zaproponuj dodatkowe kwalifikacje i certyfikaty
+       4. Sugeruj konkretne kursy i szkolenia do uzupełnienia
+       5. Wskaż obszary doświadczenia do rozwinięcia
+    
+    Format CV musi być PROFESJONALNY I CZYTELNY:
+    
+    (Na początku CV)
+    # IMIĘ NAZWISKO
+    **Stanowisko, o które się ubiegam**
+    
+    **Kontakt:** telefon | email | miejscowość
+    
+    **Podsumowanie zawodowe:**
+    Zwięzły, profesjonalny opis zawierający najważniejsze kwalifikacje i osiągnięcia (3-4 zdania).
+    
+    **DOŚWIADCZENIE ZAWODOWE:**
+    
+    **Nazwa stanowiska** | Firma, Lokalizacja | Okres zatrudnienia
+    Krótki opis firmy (1 zdanie).
+    • Osiągnięcie 1 z mierzalnym rezultatem
+    • Osiągnięcie 2 z mierzalnym rezultatem
+    • Osiągnięcie 3 z mierzalnym rezultatem
+    
+    **UMIEJĘTNOŚCI:**
+    
+    **Umiejętności techniczne:**
+    • Umiejętność 1 (poziom zaawansowania)
+    • Umiejętność 2 (poziom zaawansowania)
+    
+    **Umiejętności interpersonalne:**
+    • Umiejętność 1
+    • Umiejętność 2
+    
+    **WYKSZTAŁCENIE:**
+    
+    **Nazwa uczelni/szkoły** | Kierunek/specjalizacja | Okres
+    
+    **CERTYFIKATY I KWALIFIKACJE:**
+    • Certyfikat 1 (rok uzyskania)
+    • Certyfikat 2 (rok uzyskania)
+    
+    **SUGESTIE ROZWOJU:**
+    
     **Umiejętności do zdobycia:**
-    - [umiejętność 1] (wysoki priorytet)
-    - [umiejętność 2] (średni priorytet)
+    • Umiejętność 1 (wysoki priorytet)
+    • Umiejętność 2 (średni priorytet)
     
     **Rekomendowane certyfikaty:**
-    - [certyfikat 1]
-    - [certyfikat 2]
-    
-    **Sugerowane szkolenia:**
-    - [szkolenie 1]
-    - [szkolenie 2]
-    
-    **Obszary do rozwoju:**
-    - [konkretny aspekt doświadczenia 1]
-    - [konkretny aspekt doświadczenia 2]
+    • Certyfikat 1
+    • Certyfikat 2
     
     SZCZEGÓŁOWE WYTYCZNE DLA SEKCJI DOŚWIADCZENIA ZAWODOWEGO:
     
