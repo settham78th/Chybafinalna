@@ -762,10 +762,10 @@ def analyze_market_trends(job_title, industry):
     """
     prompt = f"""
     TASK: Przeprowadź analizę trendów rynkowych dla:
-    
+
     Stanowisko: {job_title}
     Branża: {industry}
-    
+
     Uwzględnij:
     1. Aktualne wymagania rynkowe
     2. Trendy płacowe
@@ -773,7 +773,7 @@ def analyze_market_trends(job_title, industry):
     4. Popularne technologie/narzędzia
     5. Najczęściej wymagane certyfikaty
     """
-    
+
     return send_api_request(prompt, max_tokens=2000)
 
 def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
@@ -1353,10 +1353,31 @@ def suggest_alternative_careers(cv_text):
 
     return send_api_request(prompt, max_tokens=2000)
 
+def generate_interview_questions(cv_text, job_description):
+    """
+    Generate potential interview questions based on CV and job description
+    """
+    prompt = f"""
+    TASK: Stwórz listę potencjalnych pytań na rozmowę kwalifikacyjną na podstawie CV i opisu stanowiska.
+
+    Uwzględnij:
+    1. Pytania techniczne związane z wymaganymi umiejętnościami
+    2. Pytania behawioralne bazujące na doświadczeniu
+    3. Pytania o motywację i rozwój zawodowy
+    4. Pytania sprawdzające dopasowanie do kultury organizacyjnej
+
+    CV:
+    {cv_text}
+
+    Opis stanowiska:
+    {job_description}
+    """
+
+    return send_api_request(prompt, max_tokens=2000)
+
 def generate_multi_versions(cv_text, roles):
     """
-    Generate multiple versions of a CV, each precisely tailored for specific roles
-    with advanced formatting and role-specific emphasis
+    Generate multiple versions of a CV tailored to different roles
     """
     roles_text = "\n".join([f"- {role}" for role in roles])
 
@@ -1424,14 +1445,14 @@ def analyze_job_url(url):
     try:
         response = requests.get(url, timeout=10)
         soup = BeautifulSoup(response.text, 'html.parser')
-        
+
         # Extract job description from common job board layouts
         job_description = ""
         description_elements = soup.find_all(['div', 'section'], class_=['description', 'job-description', 'details'])
-        
+
         for element in description_elements:
             job_description += element.get_text(strip=True) + "\n"
-            
+
         return job_description.strip()
     except Exception as e:
         logger.error(f"Error extracting job description from URL: {str(e)}")
