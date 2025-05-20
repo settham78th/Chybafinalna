@@ -756,6 +756,26 @@ def get_structural_quality_control_prompt(seniority, industry):
 
     return base_prompt + "\n" + industry_guidance + "\n" + style_guidance
 
+def analyze_market_trends(job_title, industry):
+    """
+    Analyze market trends for a given job title and industry
+    """
+    prompt = f"""
+    TASK: Przeprowadź analizę trendów rynkowych dla:
+    
+    Stanowisko: {job_title}
+    Branża: {industry}
+    
+    Uwzględnij:
+    1. Aktualne wymagania rynkowe
+    2. Trendy płacowe
+    3. Perspektywy rozwoju
+    4. Popularne technologie/narzędzia
+    5. Najczęściej wymagane certyfikaty
+    """
+    
+    return send_api_request(prompt, max_tokens=2000)
+
 def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
     """
     Create an optimized version of CV with advanced skills extraction, market analysis,
