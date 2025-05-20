@@ -846,7 +846,15 @@ def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
         missing_competencies_suggestions += f"- {skill}\n"
     
     prompt = f"""
-    TASK: Stwórz całkowicie nową, mistrzowską wersję CV, które zdecydowanie wyróżni kandydata na tle konkurencji. CV musi być precyzyjnie dopasowane do wymagań stanowiska, zawierać profesjonalne sformułowania i podkreślać najważniejsze osiągnięcia i umiejętności.
+    TASK: Stwórz całkowicie nową, profesjonalną wersję CV, które wyróżni kandydata na tle konkurencji. CV musi być precyzyjnie dopasowane do wymagań stanowiska, zawierać naturalne, poprawne językowo sformułowania i podkreślać najważniejsze osiągnięcia i umiejętności.
+    
+    UWAGA - KRYTYCZNE WYMAGANIA JĘZYKOWE:
+    1. Używaj WYŁĄCZNIE naturalnego, codziennego języka polskiego
+    2. UNIKAJ wymyślonych słów i dziwacznych sformułowań
+    3. NIE TWÓRZ neologizmów ani nietypowych połączeń wyrazowych
+    4. UNIKAJ bardzo formalnych, akademickich zwrotów
+    5. Sprawdź czy każde zdanie brzmi NATURALNIE po polsku
+    6. NIE UŻYWAJ słów, których nie znalazłbyś w słowniku języka polskiego
     
     Wykryty poziom doświadczenia: {seniority.upper()}
     Wykryta branża: {industry.upper()}
