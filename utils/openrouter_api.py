@@ -764,12 +764,35 @@ def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
     """
     
     warning_prompt = """
-    KRYTYCZNE ZASADY OPTYMALIZACJI:
-    1. ZAKAZ dodawania jakichkolwiek fikcyjnych informacji
-    2. ZAKAZ wymyślania nieistniejącego doświadczenia
-    3. ZAKAZ tworzenia nieprawdziwych osiągnięć
-    4. ZAKAZ dodawania niezdobytych umiejętności
-    5. ZAKAZ manipulowania datami i stanowiskami
+    !!! KRYTYCZNE ZASADY PRZETWARZANIA CV !!!
+    
+    ABSOLUTNIE ZABRONIONE JEST:
+    1. Wymyślanie jakiegokolwiek doświadczenia zawodowego
+    2. Dodawanie fikcyjnych miejsc pracy
+    3. Tworzenie nieprawdziwych stanowisk
+    4. Zmyślanie dat zatrudnienia
+    5. Dodawanie niezdobytych certyfikatów
+    6. Wymyślanie nieistniejących umiejętności
+    7. Tworzenie fałszywych osiągnięć
+    8. Manipulowanie historią edukacji
+    
+    DOZWOLONE JEST WYŁĄCZNIE:
+    1. Przekształcanie istniejącego, PRAWDZIWEGO doświadczenia w kontekście nowej roli
+    2. Podkreślanie faktycznych, WERYFIKOWALNYCH umiejętności
+    3. Uwypuklanie rzeczywistych osiągnięć z dotychczasowej kariery
+    4. Pokazanie potencjału transferu umiejętności z zawodu nauczyciela na nową rolę
+    
+    WYMAGANE DZIAŁANIA:
+    1. Zachowaj prawdziwe daty i miejsca pracy
+    2. Używaj tylko potwierdzonych informacji z oryginalnego CV
+    3. Nie dodawaj żadnych wymyślonych szczegółów
+    4. Bazuj wyłącznie na faktach z CV
+    
+    PRZY ZMIANIE BRANŻY:
+    1. Skup się na transferowalnych umiejętnościach (np. komunikacja, organizacja)
+    2. Pokaż, jak doświadczenie w nauczaniu może być wartościowe w sprzedaży
+    3. Podkreśl umiejętności miękkie zdobyte w edukacji
+    4. Zachowaj pełną prawdziwość informacji
     
     DOZWOLONE JEST WYŁĄCZNIE:
     1. Lepsze opisanie rzeczywistego doświadczenia
@@ -789,7 +812,18 @@ def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
         seniority, industry, job_type, specific_role = "junior", "general", "office", "specjalista"
 
     prompt = f"""
-    TASK: Przeprowadź głęboką analizę CV i stwórz zoptymalizowaną wersję, która podkreśli wszystkie potencjalnie wartościowe umiejętności i doświadczenia, nawet jeśli kandydat nie ma bezpośredniego doświadczenia na danym stanowisku.
+    TASK: Przeprowadź ostrożną analizę CV nauczyciela i pokaż, jak jego/jej rzeczywiste umiejętności i doświadczenie mogą być wartościowe w roli przedstawiciela handlowego. 
+    
+    KLUCZOWE ZASADY:
+    1. Zachowaj wszystkie prawdziwe informacje z CV
+    2. Nie wymyślaj żadnego doświadczenia w sprzedaży
+    3. Pokaż, jak umiejętności nauczyciela przekładają się na sprzedaż:
+       - Umiejętności prezentacji
+       - Komunikacja z różnymi osobami
+       - Cierpliwość w wyjaśnianiu
+       - Zdolność przekonywania
+       - Organizacja pracy
+    4. Uczciwie przedstaw brak doświadczenia w sprzedaży jako potencjał do nauki
 
     KLUCZOWE OBSZARY ANALIZY:
 
