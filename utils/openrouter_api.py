@@ -1335,31 +1335,67 @@ def suggest_alternative_careers(cv_text):
 
 def generate_multi_versions(cv_text, roles):
     """
-    Generate multiple versions of a CV tailored to different roles
+    Generate multiple versions of a CV, each precisely tailored for specific roles
+    with advanced formatting and role-specific emphasis
     """
     roles_text = "\n".join([f"- {role}" for role in roles])
 
     prompt = f"""
-    TASK: Create tailored versions of this CV for different roles.
+    TASK: Stwórz profesjonalnie dostosowane wersje CV dla każdej roli.
 
-    Roles to create CV versions for:
+    Role do przygotowania:
     {roles_text}
 
-    For each role:
-    1. Highlight relevant skills and experiences
-    2. Customize the professional summary
-    3. Adjust the emphasis of achievements
-    4. Remove or downplay irrelevant information
+    Dla każdej wersji CV wykonaj:
 
-    IMPORTANT: Respond in the same language as the CV. If the CV is in Polish, respond in Polish. If the CV is in English, respond in English.
+    1. ANALIZA ROLI:
+       - Zidentyfikuj kluczowe wymagania dla danej roli
+       - Określ najważniejsze kompetencje i umiejętności
+       - Zbadaj specyfikę branży i jej oczekiwania
 
-    Original CV:
+    2. TRANSFORMACJA DOŚWIADCZENIA:
+       - Przekształć każde doświadczenie pod kątem danej roli
+       - Wydobądź i podkreśl relevant achievements
+       - Dostosuj język do standardów branżowych
+       - Usuń lub zmniejsz nacisk na nieistotne elementy
+
+    3. DOSTOSOWANIE STRUKTURY:
+       - Zmień kolejność sekcji pod kątem priorytetów roli
+       - Dodaj sekcje specyficzne dla danego stanowiska
+       - Dostosuj format do standardów branżowych
+       - Zoptymalizuj pod kątem ATS dla danej branży
+
+    4. WZMOCNIENIE KLUCZOWYCH ELEMENTÓW:
+       - Dodaj sekcję highlight'ów specyficznych dla roli
+       - Podkreśl certyfikaty i szkolenia istotne dla stanowiska
+       - Zaakcentuj projekty związane z daną rolą
+       - Uwypuklij osiągnięcia najbardziej relevant dla pozycji
+
+    5. PROFESJONALNA PERSONALIZACJA:
+       - Dostosuj ton i styl języka do kultury branżowej
+       - Użyj terminologii specyficznej dla danej roli
+       - Dodaj branżowe słowa kluczowe
+       - Zachowaj spójność z wymaganiami rynku
+
+    ZASADY FORMATOWANIA:
+    - Użyj czytelnego, profesjonalnego układu
+    - Zachowaj spójny system nagłówków
+    - Zastosuj odpowiednie odstępy i marginesy
+    - Zadbaj o hierarchię informacji
+
+    WAŻNE WSKAZÓWKI:
+    - Zachowaj pełną prawdziwość informacji
+    - Nie wymyślaj doświadczenia ani umiejętności
+    - Skup się na transformacji i lepszym przedstawieniu istniejących kompetencji
+    - Każda wersja powinna być kompletna i samodzielna
+
+    Oryginalne CV:
     {cv_text}
 
-    Return each version clearly separated with a heading indicating the role.
+    Zwróć każdą wersję CV oddzieloną wyraźnym nagłówkiem z nazwą roli, zachowując pełen profesjonalizm i spójność.
     """
 
-    return send_api_request(prompt, max_tokens=3000)
+    return send_api_request(prompt, max_tokens=3500)
 
 def analyze_job_url(url):
     """
