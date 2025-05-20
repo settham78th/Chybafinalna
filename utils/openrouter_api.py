@@ -756,26 +756,6 @@ def get_structural_quality_control_prompt(seniority, industry):
 
     return base_prompt + "\n" + industry_guidance + "\n" + style_guidance
 
-def analyze_market_trends(job_title, industry):
-    """
-    Analyze market trends for a given job title and industry
-    """
-    prompt = f"""
-    TASK: Przeprowadź analizę trendów rynkowych dla:
-
-    Stanowisko: {job_title}
-    Branża: {industry}
-
-    Uwzględnij:
-    1. Aktualne wymagania rynkowe
-    2. Trendy płacowe
-    3. Perspektywy rozwoju
-    4. Popularne technologie/narzędzia
-    5. Najczęściej wymagane certyfikaty
-    """
-
-    return send_api_request(prompt, max_tokens=2000)
-
 def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
     """
     Create an optimized version of CV with advanced skills extraction, market analysis,
@@ -1353,28 +1333,6 @@ def suggest_alternative_careers(cv_text):
 
     return send_api_request(prompt, max_tokens=2000)
 
-def generate_interview_questions(cv_text, job_description):
-    """
-    Generate potential interview questions based on CV and job description
-    """
-    prompt = f"""
-    TASK: Stwórz listę potencjalnych pytań na rozmowę kwalifikacyjną na podstawie CV i opisu stanowiska.
-
-    Uwzględnij:
-    1. Pytania techniczne związane z wymaganymi umiejętnościami
-    2. Pytania behawioralne bazujące na doświadczeniu
-    3. Pytania o motywację i rozwój zawodowy
-    4. Pytania sprawdzające dopasowanie do kultury organizacyjnej
-
-    CV:
-    {cv_text}
-
-    Opis stanowiska:
-    {job_description}
-    """
-
-    return send_api_request(prompt, max_tokens=2000)
-
 def generate_multi_versions(cv_text, roles):
     """
     Generate multiple versions of a CV tailored to different roles
@@ -1382,78 +1340,30 @@ def generate_multi_versions(cv_text, roles):
     roles_text = "\n".join([f"- {role}" for role in roles])
 
     prompt = f"""
-    TASK: Stwórz profesjonalnie dostosowane wersje CV dla każdej roli.
+    TASK: Create tailored versions of this CV for different roles.
 
-    Role do przygotowania:
+    Roles to create CV versions for:
     {roles_text}
 
-    Dla każdej wersji CV wykonaj:
+    For each role:
+    1. Highlight relevant skills and experiences
+    2. Customize the professional summary
+    3. Adjust the emphasis of achievements
+    4. Remove or downplay irrelevant information
 
-    1. ANALIZA ROLI:
-       - Zidentyfikuj kluczowe wymagania dla danej roli
-       - Określ najważniejsze kompetencje i umiejętności
-       - Zbadaj specyfikę branży i jej oczekiwania
+    IMPORTANT: Respond in the same language as the CV. If the CV is in Polish, respond in Polish. If the CV is in English, respond in English.
 
-    2. TRANSFORMACJA DOŚWIADCZENIA:
-       - Przekształć każde doświadczenie pod kątem danej roli
-       - Wydobądź i podkreśl relevant achievements
-       - Dostosuj język do standardów branżowych
-       - Usuń lub zmniejsz nacisk na nieistotne elementy
-
-    3. DOSTOSOWANIE STRUKTURY:
-       - Zmień kolejność sekcji pod kątem priorytetów roli
-       - Dodaj sekcje specyficzne dla danego stanowiska
-       - Dostosuj format do standardów branżowych
-       - Zoptymalizuj pod kątem ATS dla danej branży
-
-    4. WZMOCNIENIE KLUCZOWYCH ELEMENTÓW:
-       - Dodaj sekcję highlight'ów specyficznych dla roli
-       - Podkreśl certyfikaty i szkolenia istotne dla stanowiska
-       - Zaakcentuj projekty związane z daną rolą
-       - Uwypuklij osiągnięcia najbardziej relevant dla pozycji
-
-    5. PROFESJONALNA PERSONALIZACJA:
-       - Dostosuj ton i styl języka do kultury branżowej
-       - Użyj terminologii specyficznej dla danej roli
-       - Dodaj branżowe słowa kluczowe
-       - Zachowaj spójność z wymaganiami rynku
-
-    ZASADY FORMATOWANIA:
-    - Użyj czytelnego, profesjonalnego układu
-    - Zachowaj spójny system nagłówków
-    - Zastosuj odpowiednie odstępy i marginesy
-    - Zadbaj o hierarchię informacji
-
-    WAŻNE WSKAZÓWKI:
-    - Zachowaj pełną prawdziwość informacji
-    - Nie wymyślaj doświadczenia ani umiejętności
-    - Skup się na transformacji i lepszym przedstawieniu istniejących kompetencji
-    - Każda wersja powinna być kompletna i samodzielna
-
-    Oryginalne CV:
+    Original CV:
     {cv_text}
 
-    Zwróć każdą wersję CV oddzieloną wyraźnym nagłówkiem z nazwą roli, zachowując pełen profesjonalizm i spójność.
+    Return each version clearly separated with a heading indicating the role.
     """
 
-    return send_api_request(prompt, max_tokens=3500)
+    return send_api_request(prompt, max_tokens=3000)
 
 def analyze_job_url(url):
     """
-    Extract job description from a URL with improved handling for JSON responses
-    """
-    try:
-        response = requests.get(url, timeout=10)
-        soup = BeautifulSoup(response.text, 'html.parser')
-
-        # Extract job description from common job board layouts
-        job_description = ""
-        description_elements = soup.find_all(['div', 'section'], class_=['description', 'job-description', 'details'])
-
-        for element in description_elements:
-            job_description += element.get_text(strip=True) + "\n"
-
-        return job_description.strip()
-    except Exception as e:
-        logger.error(f"Error extracting job description from URL: {str(e)}")
-        return None
+    Extract job description from a URL with improved handling forjson" in response:
+            response = response.split("```json")[1].split("```")[0].strip()
+        elif "```" in response:
+            response = response.split("```")[1].split("
