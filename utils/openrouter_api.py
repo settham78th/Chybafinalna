@@ -760,7 +760,23 @@ def get_structural_quality_control_prompt(seniority, industry):
 def optimize_cv_with_keywords(cv_text, job_description, keywords_data=None):
     """
     Create an optimized version of CV with advanced skills extraction and transferable competencies analysis,
-    even for candidates without direct experience.
+    focusing only on real experience and skills without adding any fictional information.
+    """
+    
+    warning_prompt = """
+    KRYTYCZNE ZASADY OPTYMALIZACJI:
+    1. ZAKAZ dodawania jakichkolwiek fikcyjnych informacji
+    2. ZAKAZ wymyślania nieistniejącego doświadczenia
+    3. ZAKAZ tworzenia nieprawdziwych osiągnięć
+    4. ZAKAZ dodawania niezdobytych umiejętności
+    5. ZAKAZ manipulowania datami i stanowiskami
+    
+    DOZWOLONE JEST WYŁĄCZNIE:
+    1. Lepsze opisanie rzeczywistego doświadczenia
+    2. Wydobycie ukrytych, ale PRAWDZIWYCH umiejętności
+    3. Przekształcenie istniejących osiągnięć na język branżowy
+    4. Podkreślenie faktycznych, weryfikowalnych sukcesów
+    5. Uwypuklenie realnych, potwierdzalnych kompetencji
     """
     # Wykryj poziom stanowiska i branżę
     try:
