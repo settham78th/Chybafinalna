@@ -1399,7 +1399,20 @@ def generate_multi_versions(cv_text, roles):
 
 def analyze_job_url(url):
     """
-    Extract job description from a URL with improved handling forjson" in response:
-            response = response.split("```json")[1].split("```")[0].strip()
-        elif "```" in response:
-            response = response.split("```")[1].split("
+    Extract job description from a URL with improved handling for JSON responses
+    """
+    try:
+        response = requests.get(url, timeout=10)
+        soup = BeautifulSoup(response.text, 'html.parser')
+        
+        # Extract job description from common job board layouts
+        job_description = ""
+        description_elements = soup.find_all(['div', 'section'], class_=['description', 'job-description', 'details'])
+        
+        for element in description_elements:
+            job_description += element.get_text(strip=True) + "\n"
+            
+        return job_description.strip()
+    except Exception as e:
+        logger.error(f"Error extracting job description from URL: {str(e)}")
+        return None
